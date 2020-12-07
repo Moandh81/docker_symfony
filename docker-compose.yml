@@ -38,17 +38,19 @@ services:
 
   
   www:
-    build: ./php
+    build:
+      context: ./php
+      dockerfile: Dockerfile
     container_name: www_docker_symfony
     ports:
       - "8471:80"
     volumes:
       - type: bind
-        source: ./php/vhosts
-        target: /etc/apache2/sites-enabled 
+        source: ./php/vhosts/
+        target: /etc/apache2/sites-enabled/ 
       - type: bind
         source: .
-        target: /var/www
+        target: /var/www/
     restart: always
     networks:
       - dev
